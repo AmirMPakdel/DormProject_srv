@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const { Types } = Schema;
 
 const PostSchema = new Schema({
@@ -24,6 +25,6 @@ PostSchema.statics.findAllByUserID = function(id) {
   });
 };
 
-const Post = model("Post", PostSchema);
+const Post = mongoose.model("Post", PostSchema);
 
 module.exports = Post;
