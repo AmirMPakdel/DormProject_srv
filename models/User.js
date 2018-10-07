@@ -1,18 +1,17 @@
-let Schema = require('mongoose').Schema;
-let model = require('mongoose').model;
+const { model, Schema } = require("mongoose");
+const { Types } = Schema;
 
-const UserSchema ={
 
-    token:String,
-    username:String,
-    password:String,
-    name:String,
-    phoneNumber:String,
-    registered:Boolean,
-    myPosts:[String],
-    img_url:String,
+const UserSchema = {
+  token: Types.String,
+  username: Types.String,
+  password: Types.String,
+  name: Types.String,
+  phoneNumber: Types.String,
+  registered: Types.Boolean,
+  myPosts: [{ type: Types.ObjectId, ref: "Post" }],
+  img_url: Types.String
 };
 
-const UserModel = model('User', UserSchema);
-
-module.exports = {UserModel:UserModel}
+const User = model("User", UserSchema);
+module.exports = User;
