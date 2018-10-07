@@ -1,33 +1,12 @@
-const app = require('express')();
-const bodyParser = require('body-parser');
-const ServerConsts = require('./consts/ServerConsts');
-const database = require('./database/database');
-const test = require('./database/database').test;
-
-database.mongoose_init();
-database.test();
+const app = require("express")();
+const bodyParser = require("body-parser");
+const routes = require("./Routes");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/api", routes);
 
-
-app.get('/', (req,res)=>{
-
-  let json = {"test":'Get Request Succeed!!!'};
-
-  res.send(json);
-})
-
-app.post('/', (req,res)=>{
-
-    console.log("Post recived :" +JSON.stringify(req.body));
-
-    let json = {"test":'Post Request Succeed!!!'};
-    res.send(json);
-})
-
-
-app.listen(ServerConsts.Port, ()=>{
-
-    console.log("Listenning on Port : "+ ServerConsts.Port);
+const PORT = process.env.PORT || 3000;
+app.listen(ServerConsts.Port, () => {
+  console.log("Listenning on Port : " + PORT);
 });
