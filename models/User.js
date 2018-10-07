@@ -7,9 +7,8 @@ const UserSchema = {
   username: Types.String,
   password: Types.String,
   name: Types.String,
-  phoneNumber: Types.String,
-  registered: Types.Boolean,
-  myPosts: [{ type: Types.ObjectId, ref: "Post" }],
+  phone_number: Types.String,
+  is_registered: Types.Boolean,
   img_url: Types.String
 };
 
