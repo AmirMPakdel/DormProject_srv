@@ -25,6 +25,6 @@ PostSchema.statics.findAllByUserID = function(id) {
   });
 };
 
-const Post = mongoose.model("Post", PostSchema);
+const Post = mongoose.model("post", PostSchema);
 
 module.exports = Post;

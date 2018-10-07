@@ -1,8 +1,10 @@
+console.clear();
 require("./models"); // initialize models at top (here) to avoid import order error
 const mongoose = require("mongoose");
-const app = require("express")();
+const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./Routes");
+const middlewares = require("./middlewares");
 const keys = require("./keys/dev");
 
 mongoose.connect(
@@ -16,12 +18,17 @@ mongoose.connect(
     console.log(">>> connected to database");
   }
 );
-
+const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(middlewares.log({ enabled: false }));
 app.use("/api", routes);
 
-const PORT = process.env.PORT || 3000;
+app.get("/", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(">>> listenning on Port : " + PORT);
 });
